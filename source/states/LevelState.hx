@@ -18,15 +18,17 @@ class LevelState extends FlxState
 	
 	var _level:Level;
 	var _tiles:FlxTypedGroup<FlxSprite>;
+	var _tileArray:Array<FlxSprite>;
 	var _baseTile:FlxSprite;
 	var _tileDropDown:FlxUIDropDownMenu;
 	
 	override public function create():Void
 	{
+		_tileArray = new Array<FlxSprite>();
 		_level = new Level(20, 20);
 		for (i in 0...400)
 		{
-			_level.tiles.push(new Tile("t_ggggg", false));
+			_level.tiles.push(new Tile("g", false));
 		}
 		
 		_baseTile = TileLoader.GetBaseTileSprite(state.staticData);
@@ -49,13 +51,20 @@ class LevelState extends FlxState
 	
 	function doInput():Void
 	{
-		if (FlxG.mouse.justPressed)
+		if (FlxG.mouse.pressed)
 		{
 			var x = FlxG.mouse.x >> 5;
 			var y = FlxG.mouse.y >> 5;
 			
-			trace(x + ", " + y + ", " + _tileDropDown.selectedId);
-			
+			if (x > -1 && x < _level.xDim && y > -1 && y < _level.yDim)
+			{
+				var t = _level.getTile(x, y);
+				if (t.type != _tileDropDown.selectedId)
+				{
+					_level.getTile(x, y).type = _tileDropDown.selectedId;
+					setTiles();
+				}
+			}
 		}
 		
 		//var scrollArea = 64;
@@ -110,8 +119,21 @@ class LevelState extends FlxState
 			{
 				var s = new FlxSprite(x * 32, y * 32);
 				s.loadGraphicFromSprite(_baseTile);
-				s.animation.play(_level.getTile(x, y).name, -1);
+				s.animation.play(_level.getTileAnimation(x, y), -1);
 				_tiles.add(s);
+				_tileArray.push(s);
+			}
+		}
+	}
+	
+	function setTiles():Void
+	{
+		var counter = 0;
+		for (x in 0..._level.xDim)
+		{
+			for (y in 0..._level.yDim)
+			{
+				_tileArray[counter++].animation.play(_level.getTileAnimation(x, y), -1);
 			}
 		}
 	}

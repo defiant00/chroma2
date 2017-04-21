@@ -14,5 +14,133 @@
 		"looped": false,
 		"flipX": false,
 		"flipY": false
+	},
+	{
+		"name": "t_wwwww",
+		"indices": [2],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
+	},
+	{
+		"name": "t_wgwww",
+		"indices": [3],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
+	},
+	{
+		"name": "t_wwgww",
+		"indices": [4],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
+	},
+	{
+		"name": "t_wwwgw",
+		"indices": [5],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
+	},
+	{
+		"name": "t_wwwwg",
+		"indices": [6],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
+	},
+	{
+		"name": "t_wggww",
+		"indices": [7],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
+	},
+	{
+		"name": "t_wwggw",
+		"indices": [8],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
+	},
+	{
+		"name": "t_wwwgg",
+		"indices": [9],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
+	},
+	{
+		"name": "t_wgwwg",
+		"indices": [10],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
+	},
+	{
+		"name": "t_wwggg",
+		"indices": [11],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
+	},
+	{
+		"name": "t_wgwgg",
+		"indices": [12],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
+	},
+	{
+		"name": "t_wggwg",
+		"indices": [13],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
+	},
+	{
+		"name": "t_wgggw",
+		"indices": [14],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
+	},
+	{
+		"name": "t_wgggg",
+		"indices": [15],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
+	},
+	{
+		"name": "t_wgwgw",
+		"indices": [16],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
+	},
+	{
+		"name": "t_wwgwg",
+		"indices": [17],
+		"frameRate": 0,
+		"looped": false,
+		"flipX": false,
+		"flipY": false
 	}
 ]
