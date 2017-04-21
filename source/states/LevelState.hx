@@ -5,6 +5,8 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.addons.ui.FlxInputText;
+import flixel.addons.ui.FlxUIDropDownMenu;
+import flixel.addons.ui.StrNameLabel;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
@@ -17,13 +19,14 @@ class LevelState extends FlxState
 	var _level:Level;
 	var _tiles:FlxTypedGroup<FlxSprite>;
 	var _baseTile:FlxSprite;
+	var _tileDropDown:FlxUIDropDownMenu;
 	
 	override public function create():Void
 	{
 		_level = new Level(20, 20);
 		for (i in 0...400)
 		{
-			_level.tiles.push(new Tile("_t0", false));
+			_level.tiles.push(new Tile("t_ggggg", false));
 		}
 		
 		_baseTile = TileLoader.GetBaseTileSprite(state.staticData);
@@ -32,12 +35,71 @@ class LevelState extends FlxState
 		
 		createTiles();
 		
+		createEditControls();
+		
 		super.create();
 	}
 
 	override public function update(elapsed:Float):Void
 	{
+		doInput();
+		
 		super.update(elapsed);
+	}
+	
+	function doInput():Void
+	{
+		if (FlxG.mouse.justPressed)
+		{
+			var x = FlxG.mouse.x >> 5;
+			var y = FlxG.mouse.y >> 5;
+			
+			trace(x + ", " + y + ", " + _tileDropDown.selectedId);
+			
+		}
+		
+		//var scrollArea = 64;
+		var scrollRate = 10;
+		//var fixedX = FlxG.mouse.x + FlxG.camera.x;
+		//var fixedY = FlxG.mouse.y + FlxG.camera.y;
+		
+		if (FlxG.keys.pressed.UP || FlxG.keys.pressed.W)// || fixedY < scrollArea)
+		{
+			FlxG.camera.scroll.y -= scrollRate;
+		}
+		if (FlxG.keys.pressed.DOWN || FlxG.keys.pressed.S)// || (fixedY > 720 - scrollArea))
+		{
+			FlxG.camera.scroll.y += scrollRate;
+		}
+		if (FlxG.keys.pressed.LEFT || FlxG.keys.pressed.A)// || fixedX < scrollArea)
+		{
+			FlxG.camera.scroll.x -= scrollRate;
+		}
+		if (FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.D)// || (fixedX > 1280 - scrollArea))
+		{
+			FlxG.camera.scroll.x += scrollRate;
+		}
+		
+		if (FlxG.camera.scroll.x > 0)
+		{
+			FlxG.camera.scroll.x = 0;
+		}
+		
+		if (FlxG.camera.scroll.y > -32)
+		{
+			FlxG.camera.scroll.y = -32;
+		}
+	}
+	
+	function createEditControls():Void
+	{
+		var tileTypes = new Array<StrNameLabel>();
+		tileTypes.push(new StrNameLabel("g", "Grass"));
+		tileTypes.push(new StrNameLabel("w", "Water"));
+		
+		_tileDropDown = new FlxUIDropDownMenu(0, 0, tileTypes);
+		_tileDropDown.setScrollFactor(0, 0);
+		add(_tileDropDown);
 	}
 	
 	function createTiles():Void
