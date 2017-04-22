@@ -26,10 +26,7 @@ class LevelState extends FlxState
 	{
 		_tileArray = new Array<FlxSprite>();
 		_level = new Level(20, 20);
-		for (i in 0...400)
-		{
-			_level.tiles.push(new Tile("g", false));
-		}
+		_level.fill("g");
 		
 		_baseTile = TileLoader.GetBaseTileSprite(state.staticData);
 		
@@ -56,12 +53,11 @@ class LevelState extends FlxState
 			var x = FlxG.mouse.x >> 5;
 			var y = FlxG.mouse.y >> 5;
 			
-			if (x > -1 && x < _level.xDim && y > -1 && y < _level.yDim)
+			if (x > -1 && x <= _level.xDim && y > -1 && y <= _level.yDim)
 			{
-				var t = _level.getTile(x, y);
-				if (t.type != _tileDropDown.selectedId)
+				if (_level.getTile(x, y) != _tileDropDown.selectedId)
 				{
-					_level.getTile(x, y).type = _tileDropDown.selectedId;
+					_level.setTile(x, y, _tileDropDown.selectedId);
 					setTiles();
 				}
 			}

@@ -8,7 +8,7 @@
 		"flipY": false
 	},
 	{
-		"name": "t_ggggg",
+		"name": "t_gggg",
 		"indices": [1],
 		"frameRate": 0,
 		"looped": false,
@@ -16,7 +16,7 @@
 		"flipY": false
 	},
 	{
-		"name": "t_wwwww",
+		"name": "t_wwww",
 		"indices": [2],
 		"frameRate": 0,
 		"looped": false,
@@ -24,7 +24,7 @@
 		"flipY": false
 	},
 	{
-		"name": "t_wgwww",
+		"name": "t_wggg",
 		"indices": [3],
 		"frameRate": 0,
 		"looped": false,
@@ -32,7 +32,7 @@
 		"flipY": false
 	},
 	{
-		"name": "t_wwgww",
+		"name": "t_gwgg",
 		"indices": [4],
 		"frameRate": 0,
 		"looped": false,
@@ -40,7 +40,7 @@
 		"flipY": false
 	},
 	{
-		"name": "t_wwwgw",
+		"name": "t_ggwg",
 		"indices": [5],
 		"frameRate": 0,
 		"looped": false,
@@ -48,7 +48,7 @@
 		"flipY": false
 	},
 	{
-		"name": "t_wwwwg",
+		"name": "t_gggw",
 		"indices": [6],
 		"frameRate": 0,
 		"looped": false,
@@ -56,7 +56,7 @@
 		"flipY": false
 	},
 	{
-		"name": "t_wggww",
+		"name": "t_wgwg",
 		"indices": [7],
 		"frameRate": 0,
 		"looped": false,
@@ -64,7 +64,7 @@
 		"flipY": false
 	},
 	{
-		"name": "t_wwggw",
+		"name": "t_gwgw",
 		"indices": [8],
 		"frameRate": 0,
 		"looped": false,
@@ -72,7 +72,7 @@
 		"flipY": false
 	},
 	{
-		"name": "t_wwwgg",
+		"name": "t_ggww",
 		"indices": [9],
 		"frameRate": 0,
 		"looped": false,
@@ -80,7 +80,7 @@
 		"flipY": false
 	},
 	{
-		"name": "t_wgwwg",
+		"name": "t_wggw",
 		"indices": [10],
 		"frameRate": 0,
 		"looped": false,
@@ -88,7 +88,7 @@
 		"flipY": false
 	},
 	{
-		"name": "t_wwggg",
+		"name": "t_wwgg",
 		"indices": [11],
 		"frameRate": 0,
 		"looped": false,
@@ -96,7 +96,7 @@
 		"flipY": false
 	},
 	{
-		"name": "t_wgwgg",
+		"name": "t_gwwg",
 		"indices": [12],
 		"frameRate": 0,
 		"looped": false,
@@ -104,7 +104,7 @@
 		"flipY": false
 	},
 	{
-		"name": "t_wggwg",
+		"name": "t_gwww",
 		"indices": [13],
 		"frameRate": 0,
 		"looped": false,
@@ -112,7 +112,7 @@
 		"flipY": false
 	},
 	{
-		"name": "t_wgggw",
+		"name": "t_wgww",
 		"indices": [14],
 		"frameRate": 0,
 		"looped": false,
@@ -120,7 +120,7 @@
 		"flipY": false
 	},
 	{
-		"name": "t_wgggg",
+		"name": "t_wwgw",
 		"indices": [15],
 		"frameRate": 0,
 		"looped": false,
@@ -128,16 +128,8 @@
 		"flipY": false
 	},
 	{
-		"name": "t_wgwgw",
+		"name": "t_wwwg",
 		"indices": [16],
-		"frameRate": 0,
-		"looped": false,
-		"flipX": false,
-		"flipY": false
-	},
-	{
-		"name": "t_wwgwg",
-		"indices": [17],
 		"frameRate": 0,
 		"looped": false,
 		"flipX": false,
