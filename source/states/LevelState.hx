@@ -4,13 +4,9 @@ import data.*;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.addons.ui.FlxInputText;
-import flixel.addons.ui.FlxUIDropDownMenu;
-import flixel.addons.ui.StrNameLabel;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.ui.FlxButton;
+import flixel.math.FlxPoint;
 
 class LevelState extends FlxState
 {
@@ -18,32 +14,45 @@ class LevelState extends FlxState
 	
 	var _level:Level;
 	var _tiles:FlxTypedGroup<FlxSprite>;
+	var _editControls:FlxTypedGroup<FlxSprite>;
 	var _tileArray:Array<FlxSprite>;
-	var _baseTile:FlxSprite;
-	var _tileDropDown:FlxUIDropDownMenu;
+	var _baseSprite:FlxSprite;
+	var _editTile:FlxSprite;
+	var _tilePicker:TilePickerState;
 	
 	override public function create():Void
 	{
+		super.create();
+		
+		destroySubStates = false;
+		
+		_tilePicker = new TilePickerState();
+		_tilePicker.state = state;
+		_tilePicker.closeCallback = tilePickerClosed;
+		
 		_tileArray = new Array<FlxSprite>();
 		_level = new Level(20, 20);
-		_level.fill("g");
+		_level.fill("t_gggg");
 		
-		_baseTile = TileLoader.GetBaseTileSprite(state.staticData);
+		_baseSprite = TileLoader.GetBaseTileSprite(state.staticData);
 		
 		add(_tiles = new FlxTypedGroup<FlxSprite>());
 		
 		createTiles();
 		
 		createEditControls();
-		
-		super.create();
 	}
 
 	override public function update(elapsed:Float):Void
 	{
-		doInput();
-		
 		super.update(elapsed);
+		
+		doInput();
+	}
+	
+	function tilePickerClosed():Void
+	{
+		_editTile.animation.play(_tilePicker.selectedTile);
 	}
 	
 	function doInput():Void
@@ -53,13 +62,17 @@ class LevelState extends FlxState
 			var x = FlxG.mouse.x >> 5;
 			var y = FlxG.mouse.y >> 5;
 			
-			if (x > -1 && x <= _level.xDim && y > -1 && y <= _level.yDim)
+			if (x > -1 && x < _level.tileXDim && y > -1 && y < _level.tileYDim)
 			{
-				if (_level.getTile(x, y) != _tileDropDown.selectedId)
+				if (_level.getTile(x, y) != _editTile.animation.name)
 				{
-					_level.setTile(x, y, _tileDropDown.selectedId);
+					_level.setTile(x, y, _editTile.animation.name);
 					setTiles();
 				}
+			}
+			else if (x == 0 && y == -1)
+			{
+				openSubState(_tilePicker);
 			}
 		}
 		
@@ -98,24 +111,24 @@ class LevelState extends FlxState
 	
 	function createEditControls():Void
 	{
-		var tileTypes = new Array<StrNameLabel>();
-		tileTypes.push(new StrNameLabel("g", "Grass"));
-		tileTypes.push(new StrNameLabel("w", "Water"));
-		
-		_tileDropDown = new FlxUIDropDownMenu(0, 0, tileTypes);
-		_tileDropDown.setScrollFactor(0, 0);
-		add(_tileDropDown);
+		add(_editControls = new FlxTypedGroup<FlxSprite>());
+		_editTile = new FlxSprite();
+		_editTile.loadGraphicFromSprite(_baseSprite);
+		_editTile.animation.play("t_gggg");
+		_editTile.scrollFactor.x = 0;
+		_editTile.scrollFactor.y = 0;
+		_editControls.add(_editTile);
 	}
 	
 	function createTiles():Void
 	{
-		for (x in 0..._level.xDim)
+		for (x in 0..._level.tileXDim)
 		{
-			for (y in 0..._level.yDim)
+			for (y in 0..._level.tileYDim)
 			{
 				var s = new FlxSprite(x * 32, y * 32);
-				s.loadGraphicFromSprite(_baseTile);
-				s.animation.play(_level.getTileAnimation(x, y), -1);
+				s.loadGraphicFromSprite(_baseSprite);
+				s.animation.play(_level.getTile(x, y), -1);
 				_tiles.add(s);
 				_tileArray.push(s);
 			}
@@ -125,11 +138,11 @@ class LevelState extends FlxState
 	function setTiles():Void
 	{
 		var counter = 0;
-		for (x in 0..._level.xDim)
+		for (x in 0..._level.tileXDim)
 		{
-			for (y in 0..._level.yDim)
+			for (y in 0..._level.tileYDim)
 			{
-				_tileArray[counter++].animation.play(_level.getTileAnimation(x, y), -1);
+				_tileArray[counter++].animation.play(_level.getTile(x, y), -1);
 			}
 		}
 	}

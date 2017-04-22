@@ -14,6 +14,8 @@ class SplashState extends FlxState
 	
 	override public function create():Void
 	{
+		super.create();
+		
 		FlxG.mouse.useSystemCursor = true;
 
 		var t = new FlxText("Deffie Games Presents...");
@@ -24,12 +26,12 @@ class SplashState extends FlxState
 		_totalTime = 0;
 		
 		loadGameData();
-		
-		super.create();
 	}
 	
 	override public function update(elapsed:Float):Void
 	{
+		super.update(elapsed);
+		
 		_totalTime += elapsed;
 
 		//
@@ -41,8 +43,6 @@ class SplashState extends FlxState
 			ls.state = _state;
 			FlxG.switchState(ls);
 		}
-
-		super.update(elapsed);
 	}
 	
 	function loadGameData():Void
