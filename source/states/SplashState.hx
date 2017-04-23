@@ -39,7 +39,7 @@ class SplashState extends FlxState
 		//
 		if (_totalTime > 0 || FlxG.mouse.justPressed || FlxG.keys.anyJustPressed([ESCAPE, SPACE, ENTER]))
 		{
-			var ls = new LevelState();
+			var ls = new LevelEditorState();
 			ls.state = _state;
 			FlxG.switchState(ls);
 		}
