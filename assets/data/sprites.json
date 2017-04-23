@@ -1,0 +1,278 @@
+{
+  "areas": [
+    {
+      "x": 0,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 32,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 64,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 96,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 128,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 160,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 192,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 224,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 256,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 288,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 320,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 352,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 384,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 416,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 448,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 480,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 512,
+      "y": 0,
+      "width": 32,
+      "height": 32
+    }
+  ],
+  "sprites": [
+    {
+      "name": "indicator",
+      "indices": [
+        8
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_gggg",
+      "indices": [
+        0
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_wwww",
+      "indices": [
+        16
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_wggg",
+      "indices": [
+        9
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_gwgg",
+      "indices": [
+        4
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_ggwg",
+      "indices": [
+        2
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_gggw",
+      "indices": [
+        1
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_wgwg",
+      "indices": [
+        11
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_gwgw",
+      "indices": [
+        5
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_ggww",
+      "indices": [
+        3
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_wggw",
+      "indices": [
+        10
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_wwgg",
+      "indices": [
+        13
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_gwwg",
+      "indices": [
+        6
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_gwww",
+      "indices": [
+        7
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_wgww",
+      "indices": [
+        12
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_wwgw",
+      "indices": [
+        14
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "t_wwwg",
+      "indices": [
+        15
+      ],
+      "frameRate": 0,
+      "looped": false,
+      "flipX": false,
+      "flipY": false
+    }
+  ]
+}
