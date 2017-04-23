@@ -50,12 +50,22 @@ class SplashState extends FlxState
 		_state = new State();
 		_state.staticData = new StaticData();
 		
-		// Animations
-		var aArr:Array<Dynamic> = Json.parse(File.getContent("assets/data/animations.json"));
-		for (animation in aArr)
+		var spr = Json.parse(File.getContent("assets/data/sprites.json"));
+		
+		// Areas
+		var areas:Array<Dynamic> = spr.areas;
+		for (area in areas)
 		{
-			var a = new Animation(animation.name, animation.indices, animation.frameRate, animation.looped, animation.flipX, animation.flipY);
-			_state.staticData.animations.push(a);
+			var a = new Area(area.x, area.y, area.width, area.height);
+			_state.staticData.areas.push(a);
+		}
+		
+		// Sprites
+		var sprites:Array<Dynamic> = spr.sprites;
+		for (sprite in sprites)
+		{
+			var s = new Sprite(sprite.name, sprite.indices, sprite.frameRate, sprite.looped, sprite.flipX, sprite.flipY);
+			_state.staticData.sprites.push(s);
 		}
 	}
 }

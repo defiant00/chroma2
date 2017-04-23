@@ -2,10 +2,12 @@ package data;
 
 class StaticData
 {
-	public var animations:Array<Animation>;
+	public var areas:Array<Area>;
+	public var sprites:Array<Sprite>;
 
 	public function new()
 	{
-		animations = new Array<Animation>();
+		sprites = new Array<Sprite>();
+		areas = new Array<Area>();
 	}
 }

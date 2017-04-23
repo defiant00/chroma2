@@ -23,7 +23,7 @@ class TilePickerState extends FlxSubState
 		
 		_tiles = new Array<String>();
 		
-		_baseSprite = TileLoader.GetBaseTileSprite(state.staticData);
+		_baseSprite = SpriteLoader.GetBaseSprite(state.staticData);
 		
 		createTileGrid();
 	}
@@ -48,18 +48,18 @@ class TilePickerState extends FlxSubState
 	function createTileGrid():Void
 	{
 		var count = 0;
-		for (a in state.staticData.animations)
+		for (spr in state.staticData.sprites)
 		{
-			if (a.name.indexOf("t_") == 0)
+			if (spr.name.indexOf("t_") == 0)
 			{
 				var x = (count % 37) * 34;
 				var y = Std.int(count / 37) * 34;
 				
 				var s = new FlxSprite(x, y);
 				s.loadGraphicFromSprite(_baseSprite);
-				s.animation.play(a.name);
+				s.animation.play(spr.name);
 				add(s);
-				_tiles.push(a.name);
+				_tiles.push(spr.name);
 				count++;
 			}
 		}

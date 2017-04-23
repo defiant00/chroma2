@@ -45,7 +45,7 @@ class LevelEditorState extends FlxState
 		_level = new Level(20, 20);
 		_level.fill("t_gggg");
 		
-		_baseSprite = TileLoader.GetBaseTileSprite(state.staticData);
+		_baseSprite = SpriteLoader.GetBaseSprite(state.staticData);
 		
 		add(_tiles = new FlxTypedGroup<FlxSprite>());
 		add(_blocks = new FlxTypedGroup<FlxSprite>());
@@ -188,7 +188,7 @@ class LevelEditorState extends FlxState
 			{
 				var s = new FlxSprite(x * 32 + 16, y * 32 + 16);
 				s.loadGraphicFromSprite(_baseSprite);
-				s.animation.play("s", -1);
+				s.animation.play("indicator", -1);
 				s.visible = _level.getBlock(x, y);
 				s.color = FlxColor.RED;
 				_blocks.add(s);

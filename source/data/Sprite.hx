@@ -1,6 +1,6 @@
 package data;
 
-class Animation 
+class Sprite 
 {
 	public var name:String;
 	public var indices:Array<Int>;
