@@ -134,5 +134,13 @@
     "looped": false,
     "flipX": false,
     "flipY": false
+  },
+  {
+    "name": "d_flower1",
+    "frames": [ "flower1_1", "flower1_2", "flower1_3", "flower1_4" ],
+    "framerate": 8,
+    "looped": true,
+    "flipX": false,
+    "flipY": false
   }
 ]

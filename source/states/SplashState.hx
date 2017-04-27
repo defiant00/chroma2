@@ -56,7 +56,7 @@ class SplashState extends FlxState
 		var areas:Array<Dynamic> = spr.areas;
 		for (area in areas)
 		{
-			var a = new Area(area.x, area.y, area.width, area.height);
+			var a = new Rectangle(area.x, area.y, area.width, area.height);
 			_state.staticData.areas.push(a);
 		}
 		
@@ -64,7 +64,7 @@ class SplashState extends FlxState
 		var sprites:Array<Dynamic> = spr.sprites;
 		for (sprite in sprites)
 		{
-			var s = new Sprite(sprite.name, sprite.indices, sprite.frameRate, sprite.looped, sprite.flipX, sprite.flipY);
+			var s = new Sprite(sprite.name, sprite.indices, sprite.frameRate, sprite.looped, sprite.flipX, sprite.flipY, _state);
 			_state.staticData.sprites.push(s);
 		}
 	}

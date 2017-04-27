@@ -7,6 +7,7 @@ class Level
 	public var tileXDim:Int;
 	public var tileYDim:Int;
 	var tiles:Array<String>;
+	var decals:Array<String>;
 	var blocks:Array<Bool>;
 	
 	public function new(xDim:Int, yDim:Int)
@@ -16,6 +17,7 @@ class Level
 		this.tileXDim = xDim + 1;
 		this.tileYDim = yDim + 1;
 		this.tiles = new Array<String>();
+		this.decals = new Array<String>();
 		this.blocks = new Array<Bool>();
 	}
 	
@@ -27,6 +29,7 @@ class Level
 		}
 		for (i in 0...(xDim * yDim))
 		{
+			decals.push("");
 			blocks.push(false);
 		}
 	}
@@ -39,6 +42,16 @@ class Level
 	public inline function setTile(x:Int, y:Int, tile:String):Void
 	{
 		tiles[x + y * tileXDim] = tile;
+	}
+	
+	public inline function getDecal(x:Int, y:Int):String
+	{
+		return decals[x + y * xDim];
+	}
+	
+	public inline function setDecal(x:Int, y:Int, decal:String):Void
+	{
+		decals[x + y * xDim] = decal;
 	}
 	
 	public inline function getBlock(x:Int, y:Int):Bool
