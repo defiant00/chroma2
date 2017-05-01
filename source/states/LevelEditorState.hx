@@ -18,6 +18,8 @@ class LevelEditorState extends FlxState
 	var _tiles:FlxTypedGroup<FlxSprite>;
 	var _decals:FlxTypedGroup<FlxSprite>;
 	var _blocks:FlxTypedGroup<FlxSprite>;
+	var _tileHover:FlxSprite;
+	var _blockHover:FlxSprite;
 	var _editControls:FlxTypedGroup<FlxSprite>;
 	var _tileArray:Array<FlxSprite>;
 	var _decalArray:Array<FlxSprite>;
@@ -88,13 +90,18 @@ class LevelEditorState extends FlxState
 	
 	function doInput():Void
 	{
+		var x = FlxG.mouse.x >> 5;
+		var y = FlxG.mouse.y >> 5;
+		var bx = (FlxG.mouse.x - 16) >> 5;
+		var by = (FlxG.mouse.y - 16) >> 5;
+		
+		_tileHover.setPosition(x * 32, y * 32);
+		_blockHover.setPosition(bx * 32 + 16, by * 32 + 16);
+		
 		if (FlxG.mouse.pressed)
 		{
 			var sx = FlxG.mouse.screenX;
 			var sy = FlxG.mouse.screenY;
-			
-			var x = FlxG.mouse.x >> 5;
-			var y = FlxG.mouse.y >> 5;
 			
 			if (sy > -1 && sy < 35)
 			{
@@ -119,20 +126,17 @@ class LevelEditorState extends FlxState
 		
 		if (FlxG.mouse.justPressedRight)
 		{
-			var x = (FlxG.mouse.x - 16) >> 5;
-			var y = (FlxG.mouse.y - 16) >> 5;
-			
-			if (x > -1 && x < _level.xDim && y > -1 && y < _level.yDim)
+			if (bx > -1 && bx < _level.xDim && by > -1 && by < _level.yDim)
 			{
 				if (FlxG.keys.pressed.SHIFT)
 				{
-					_level.setBlock(x, y, !_level.getBlock(x, y));
+					_level.setBlock(bx, by, !_level.getBlock(bx, by));
 					setBlocks();
 				}
 				else
 				{
-					var decal = _level.getDecal(x, y);
-					_level.setDecal(x, y, decal == "" ? _selectedDecal.animation.name : "");
+					var decal = _level.getDecal(bx, by);
+					_level.setDecal(bx, by, decal == "" ? _selectedDecal.animation.name : "");
 					setDecals();
 				}
 			}
@@ -174,6 +178,15 @@ class LevelEditorState extends FlxState
 	
 	function createEditControls():Void
 	{
+		add(_tileHover = new FlxSprite(0, 0));
+		_tileHover.loadGraphicFromSprite(_baseSprite);
+		_tileHover.animation.play("corners");
+		
+		add(_blockHover = new FlxSprite(16, 16));
+		_blockHover.loadGraphicFromSprite(_baseSprite);
+		_blockHover.animation.play("corners");
+		_blockHover.color = FlxColor.RED;
+		
 		add(_editControls = new FlxTypedGroup<FlxSprite>());
 		var bg = new FlxSprite().makeGraphic(FlxG.width, 34, 0x80000000);
 		bg.scrollFactor.set(0, 0);

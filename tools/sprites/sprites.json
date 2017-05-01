@@ -142,5 +142,13 @@
     "looped": true,
     "flipX": false,
     "flipY": false
+  },
+  {
+    "name": "corners",
+    "frames": [ "corners" ],
+    "framerate": 0,
+    "looped": false,
+    "flipX": false,
+    "flipY": false
   }
 ]
