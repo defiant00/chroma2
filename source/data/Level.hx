@@ -1,4 +1,5 @@
 package data;
+import flixel.tile.FlxTileblock;
 
 class Level 
 {
@@ -7,8 +8,7 @@ class Level
 	public var tileXDim:Int;
 	public var tileYDim:Int;
 	var tiles:Array<String>;
-	var decals:Array<String>;
-	var blocks:Array<Bool>;
+	var blocks:Array<LevelBlock>;
 	
 	public function new(xDim:Int, yDim:Int)
 	{
@@ -17,8 +17,18 @@ class Level
 		this.tileXDim = xDim + 1;
 		this.tileYDim = yDim + 1;
 		this.tiles = new Array<String>();
-		this.decals = new Array<String>();
-		this.blocks = new Array<Bool>();
+		this.blocks = new Array<LevelBlock>();
+	}
+	
+	public function deserialize(obj:Dynamic)
+	{
+		tiles = obj.tiles;
+		
+		var blArr:Array<Dynamic> = obj.blocks;
+		for (bl in blArr)
+		{
+			blocks.push(new LevelBlock(bl.blocked, bl.decal));
+		}
 	}
 	
 	public function fill(tile:String):Void
@@ -29,8 +39,7 @@ class Level
 		}
 		for (i in 0...(xDim * yDim))
 		{
-			decals.push("");
-			blocks.push(false);
+			blocks.push(new LevelBlock(false, ""));
 		}
 	}
 	
@@ -44,23 +53,8 @@ class Level
 		tiles[x + y * tileXDim] = tile;
 	}
 	
-	public inline function getDecal(x:Int, y:Int):String
-	{
-		return decals[x + y * xDim];
-	}
-	
-	public inline function setDecal(x:Int, y:Int, decal:String):Void
-	{
-		decals[x + y * xDim] = decal;
-	}
-	
-	public inline function getBlock(x:Int, y:Int):Bool
+	public inline function getBlock(x:Int, y:Int):LevelBlock
 	{
 		return blocks[x + y * xDim];
-	}
-	
-	public inline function setBlock(x:Int, y:Int, block:Bool)
-	{
-		blocks[x + y * xDim] = block;
 	}
 }

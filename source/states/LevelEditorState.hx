@@ -1,6 +1,8 @@
 package states;
 
 import data.*;
+import haxe.Json;
+import states.level_editor.*;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -9,6 +11,7 @@ import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import sys.io.File;
 
 class LevelEditorState extends FlxState
 {
@@ -33,6 +36,10 @@ class LevelEditorState extends FlxState
 	var _showDecals:Bool;
 	var _statusText:FlxText;
 	
+	var _newState:NewLevelState;
+	var _saveState:SaveLevelState;
+	var _loadState:LoadLevelState;
+	
 	override public function create():Void
 	{
 		super.create();
@@ -52,11 +59,17 @@ class LevelEditorState extends FlxState
 		_decalPicker.prefix = "d_";
 		_decalPicker.closeCallback = decalPickerClosed;
 		
-		_tileArray = new Array<FlxSprite>();
-		_decalArray = new Array<FlxSprite>();
-		_blockArray = new Array<FlxSprite>();
-		_level = new Level(20, 20);
-		_level.fill("t_gggg");
+		_newState = new NewLevelState();
+		_newState.closeCallback = newClosed;
+		_newState.x = 20;
+		_newState.y = 20;
+		_newState.ok = true;
+		
+		_saveState = new SaveLevelState();
+		_saveState.closeCallback = saveClosed;
+		
+		_loadState = new LoadLevelState();
+		_loadState.closeCallback = loadClosed;
 		
 		_baseSprite = SpriteLoader.GetBaseSprite(state.staticData);
 		
@@ -64,11 +77,9 @@ class LevelEditorState extends FlxState
 		add(_decals = new FlxTypedGroup<FlxSprite>());
 		add(_blocks = new FlxTypedGroup<FlxSprite>());
 		
-		createTiles();
-		createDecals();
-		createBlocks();
-		
 		createEditControls();
+		
+		newClosed();
 	}
 
 	override public function update(elapsed:Float):Void
@@ -86,6 +97,53 @@ class LevelEditorState extends FlxState
 	function decalPickerClosed():Void
 	{
 		_selectedDecal.animation.play(_decalPicker.selectedSprite);
+	}
+	
+	function newClosed():Void
+	{
+		if (_newState.ok)
+		{
+			_level = new Level(_newState.x, _newState.y);
+			_level.fill("t_gggg");
+			
+			updateSprites();
+		}
+	}
+	
+	function saveClosed():Void
+	{
+		if (_saveState.ok)
+		{
+			File.saveContent("C:\\git\\chroma2\\assets\\data\\" + _saveState.file + ".json", Json.stringify(_level, "\t"));
+		}
+	}
+	
+	function loadClosed():Void
+	{
+		if (_loadState.ok)
+		{
+			var lvl = Json.parse(File.getContent("C:\\git\\chroma2\\assets\\data\\" + _loadState.file + ".json"));
+			
+			_level = new Level(lvl.xDim, lvl.yDim);
+			_level.deserialize(lvl);
+			
+			updateSprites();
+		}
+	}
+	
+	function updateSprites():Void
+	{
+		_tileArray = new Array<FlxSprite>();
+		_decalArray = new Array<FlxSprite>();
+		_blockArray = new Array<FlxSprite>();
+		
+		_tiles.clear();
+		_decals.clear();
+		_blocks.clear();
+		
+		createTiles();
+		createDecals();
+		createBlocks();
 	}
 	
 	function doInput():Void
@@ -128,15 +186,16 @@ class LevelEditorState extends FlxState
 		{
 			if (bx > -1 && bx < _level.xDim && by > -1 && by < _level.yDim)
 			{
+				var block = _level.getBlock(bx, by);
+				
 				if (FlxG.keys.pressed.SHIFT)
 				{
-					_level.setBlock(bx, by, !_level.getBlock(bx, by));
+					block.blocked = !block.blocked;
 					setBlocks();
 				}
 				else
 				{
-					var decal = _level.getDecal(bx, by);
-					_level.setDecal(bx, by, decal == "" ? _selectedDecal.animation.name : "");
+					block.decal = block.decal == "" ? _selectedDecal.animation.name : "";
 					setDecals();
 				}
 			}
@@ -154,6 +213,22 @@ class LevelEditorState extends FlxState
 			_showDecals = !_showDecals;
 			setStatusText();
 			setDecals();
+		}
+		
+		if (FlxG.keys.pressed.CONTROL)
+		{
+			if (FlxG.keys.justPressed.N)
+			{
+				openSubState(_newState);
+			}
+			if (FlxG.keys.justPressed.S)
+			{
+				openSubState(_saveState);
+			}
+			if (FlxG.keys.justPressed.L)
+			{
+				openSubState(_loadState);
+			}
 		}
 		
 		var scrollRate = 10;
@@ -235,10 +310,10 @@ class LevelEditorState extends FlxState
 			{
 				var s = new FlxSprite(x * 32 + 16, y * 32 + 16);
 				s.loadGraphicFromSprite(_baseSprite);
-				var decal = _level.getDecal(x, y);
-				if (decal != "" && _showDecals)
+				var block = _level.getBlock(x, y);
+				if (block.decal != "" && _showDecals)
 				{
-					s.animation.play(decal, -1);
+					s.animation.play(block.decal, -1);
 					s.visible = true;
 				}
 				else
@@ -260,7 +335,7 @@ class LevelEditorState extends FlxState
 				var s = new FlxSprite(x * 32 + 16, y * 32 + 16);
 				s.loadGraphicFromSprite(_baseSprite);
 				s.animation.play("indicator", -1);
-				s.visible = _level.getBlock(x, y);
+				s.visible = _level.getBlock(x, y).blocked;
 				s.color = FlxColor.RED;
 				_blocks.add(s);
 				_blockArray.push(s);
@@ -287,11 +362,11 @@ class LevelEditorState extends FlxState
 		{
 			for (y in 0..._level.yDim)
 			{
-				var decal = _level.getDecal(x, y);
+				var block = _level.getBlock(x, y);
 				var s = _decalArray[counter++];
-				if (decal != "" && _showDecals)
+				if (block.decal != "" && _showDecals)
 				{
-					s.animation.play(decal, -1);
+					s.animation.play(block.decal, -1);
 					s.visible = true;
 				}
 				else
@@ -309,7 +384,7 @@ class LevelEditorState extends FlxState
 		{
 			for (y in 0..._level.yDim)
 			{
-				_blockArray[counter++].visible = _showBlocks && _level.getBlock(x, y);
+				_blockArray[counter++].visible = _showBlocks && _level.getBlock(x, y).blocked;
 			}
 		}
 	}

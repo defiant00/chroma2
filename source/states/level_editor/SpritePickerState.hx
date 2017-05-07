@@ -1,4 +1,4 @@
-package states;
+package states.level_editor;
 
 import data.*;
 import flixel.FlxG;
