@@ -8,128 +8,16 @@
     "flipY": false
   },
   {
+    "name": "corners",
+    "frames": [ "corners" ],
+    "framerate": 0,
+    "looped": false,
+    "flipX": false,
+    "flipY": false
+  },
+  {
     "name": "t_gggg",
     "frames": [ "gggg" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "t_wwww",
-    "frames": [ "wwww" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "t_wggg",
-    "frames": [ "wggg" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "t_gwgg",
-    "frames": [ "gwgg" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "t_ggwg",
-    "frames": [ "ggwg" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "t_gggw",
-    "frames": [ "gggw" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "t_wgwg",
-    "frames": [ "wgwg" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "t_gwgw",
-    "frames": [ "gwgw" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "t_ggww",
-    "frames": [ "ggww" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "t_wggw",
-    "frames": [ "wggw" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "t_wwgg",
-    "frames": [ "wwgg" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "t_gwwg",
-    "frames": [ "gwwg" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "t_gwww",
-    "frames": [ "gwww" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "t_wgww",
-    "frames": [ "wgww" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "t_wwgw",
-    "frames": [ "wwgw" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "t_wwwg",
-    "frames": [ "wwwg" ],
     "frameRate": 0,
     "looped": false,
     "flipX": false,
@@ -140,14 +28,6 @@
     "frames": [ "flower1_1", "flower1_2", "flower1_3", "flower1_4" ],
     "framerate": 8,
     "looped": true,
-    "flipX": false,
-    "flipY": false
-  },
-  {
-    "name": "corners",
-    "frames": [ "corners" ],
-    "framerate": 0,
-    "looped": false,
     "flipX": false,
     "flipY": false
   }
