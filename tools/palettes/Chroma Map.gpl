@@ -1,0 +1,20 @@
+GIMP Palette
+Name: Chroma Map
+Columns: 8
+#
+255	0	255	Placeholder
+0	0	0	Black
+63	63	63	Dark Gray
+127	127	127	Gray
+191	191	191 Light Gray
+255 255 255	White
+0	0	0	_
+0	0	0	_
+15	63	0	Grass (Dark)
+31	127	0	Grass (Mid)
+63	191	0	Grass (Light)
+0	0	0	_
+0	63	127	Water (Dark)
+0	127	255	Water (Mid)
+95	191	255	Water (Light)
+0	0	0	_
