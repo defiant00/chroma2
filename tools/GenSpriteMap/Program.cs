@@ -36,7 +36,7 @@ namespace GenSpriteMap
                     {
                         outSprites.areas.Add(new SpriteOutArea { x = area.X, y = area.Y, width = img.Width, height = img.Height });
 
-                        g.DrawImage(img, area.Location);
+                        g.DrawImage(img, new Rectangle(area.Location, img.Size));
                         areas.RemoveAt(i);
                         if (img.Height < area.Height)
                         {
