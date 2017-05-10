@@ -1,5 +1,13 @@
 [
   {
+    "name": "t_placeholder",
+    "frames": [ "placeholder" ],
+    "frameRate": 0,
+    "looped": false,
+    "flipX": false,
+    "flipY": false
+  },
+  {
     "name": "indicator",
     "frames": [ "indicator" ],
     "frameRate": 0,
@@ -40,16 +48,16 @@
     "flipY": false
   },
   {
-    "name": "t_gwgw",
-    "frames": [ "gwgw" ],
+    "name": "t_gwgw_g",
+    "frames": [ "gwgw_g" ],
     "frameRate": 0,
     "looped": false,
     "flipX": false,
     "flipY": false
   },
   {
-    "name": "t_wgwg",
-    "frames": [ "wgwg" ],
+    "name": "t_gwgw_w",
+    "frames": [ "gwgw_w" ],
     "frameRate": 0,
     "looped": false,
     "flipX": false,
