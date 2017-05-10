@@ -29,7 +29,11 @@ class LevelEditorState extends FlxState
 	var _blockArray:Array<FlxSprite>;
 	var _baseSprite:FlxSprite;
 	var _selectedTile:FlxSprite;
+	var _tileAngle:Float;
+	var _tileAngleText:FlxText;
 	var _selectedDecal:FlxSprite;
+	var _decalAngle:Float;
+	var _decalAngleText:FlxText;
 	var _tilePicker:SpritePickerState;
 	var _decalPicker:SpritePickerState;
 	var _showBlocks:Bool;
@@ -48,6 +52,9 @@ class LevelEditorState extends FlxState
 		
 		_showBlocks = true;
 		_showDecals = true;
+		
+		_tileAngle = 0;
+		_decalAngle = 0;
 		
 		_tilePicker = new SpritePickerState();
 		_tilePicker.state = state;
@@ -152,42 +159,57 @@ class LevelEditorState extends FlxState
 		var y = FlxG.mouse.y >> 5;
 		var bx = (FlxG.mouse.x - 16) >> 5;
 		var by = (FlxG.mouse.y - 16) >> 5;
+		var sx = FlxG.mouse.screenX;
+		var sy = FlxG.mouse.screenY;
 		
 		_tileHover.setPosition(x * 32, y * 32);
 		_blockHover.setPosition(bx * 32 + 16, by * 32 + 16);
 		
-		if (FlxG.mouse.pressed)
+		if (FlxG.mouse.pressed || FlxG.mouse.justPressedRight)
 		{
-			var sx = FlxG.mouse.screenX;
-			var sy = FlxG.mouse.screenY;
-			
 			if (sy > -1 && sy < 35)
 			{
 				if (sx > -1 && sx < 35)
 				{
-					openSubState(_tilePicker);
+					if (FlxG.mouse.pressed)
+					{
+						openSubState(_tilePicker);
+					}
+					else
+					{
+						_tileAngle = (_tileAngle + 90) % 360;
+						_selectedTile.angle = _tileAngle;
+						_tileAngleText.text = Std.string(_tileAngle);
+					}
 				}
 				else if (sx > 34 && sx < 69)
 				{
-					openSubState(_decalPicker);
+					if (FlxG.mouse.pressed)
+					{
+						openSubState(_decalPicker);
+					}
+					else
+					{
+						_decalAngle = (_decalAngle + 90) % 360;
+						_selectedDecal.angle = _decalAngle;
+						_decalAngleText.text = Std.string(_decalAngle);
+					}
 				}
 			}
-			else if (x > -1 && x < _level.tileXDim && y > -1 && y < _level.tileYDim)
+			else if (FlxG.mouse.pressed && x > -1 && x < _level.tileXDim && y > -1 && y < _level.tileYDim)
 			{
-				if (_level.getTile(x, y) != _selectedTile.animation.name)
+				var t = _level.getTile(x, y);
+				if (t.name != _selectedTile.animation.name || t.angle != _selectedTile.angle)
 				{
-					_level.setTile(x, y, _selectedTile.animation.name);
+					t.name = _selectedTile.animation.name;
+					t.angle = _tileAngle;
 					setTiles();
 				}
 			}
-		}
-		
-		if (FlxG.mouse.justPressedRight)
-		{
-			if (bx > -1 && bx < _level.xDim && by > -1 && by < _level.yDim)
+			else if (FlxG.mouse.justPressedRight && bx > -1 && bx < _level.xDim && by > -1 && by < _level.yDim)
 			{
 				var block = _level.getBlock(bx, by);
-				
+						
 				if (FlxG.keys.pressed.SHIFT)
 				{
 					block.blocked = !block.blocked;
@@ -196,6 +218,7 @@ class LevelEditorState extends FlxState
 				else
 				{
 					block.decal = block.decal == "" ? _selectedDecal.animation.name : "";
+					block.angle = _decalAngle;
 					setDecals();
 				}
 			}
@@ -277,6 +300,14 @@ class LevelEditorState extends FlxState
 		_selectedDecal.animation.play("d_flower1");
 		_selectedDecal.scrollFactor.set(0, 0);
 		
+		_editControls.add(_tileAngleText = new FlxText(2, 2));
+		_tileAngleText.scrollFactor.set(0, 0);
+		_tileAngleText.text = "0";
+		
+		_editControls.add(_decalAngleText = new FlxText(36, 2));
+		_decalAngleText.scrollFactor.set(0, 0);
+		_decalAngleText.text = "0";
+		
 		_editControls.add(_statusText = new FlxText(120, 4));
 		_statusText.scrollFactor.set(0, 0);
 		setStatusText();
@@ -295,7 +326,9 @@ class LevelEditorState extends FlxState
 			{
 				var s = new FlxSprite(x * 32, y * 32);
 				s.loadGraphicFromSprite(_baseSprite);
-				s.animation.play(_level.getTile(x, y), -1);
+				var t = _level.getTile(x, y);
+				s.animation.play(t.name, -1);
+				s.angle = t.angle;
 				_tiles.add(s);
 				_tileArray.push(s);
 			}
@@ -314,6 +347,7 @@ class LevelEditorState extends FlxState
 				if (block.decal != "" && _showDecals)
 				{
 					s.animation.play(block.decal, -1);
+					s.angle = block.angle;
 					s.visible = true;
 				}
 				else
@@ -350,7 +384,9 @@ class LevelEditorState extends FlxState
 		{
 			for (y in 0..._level.tileYDim)
 			{
-				_tileArray[counter++].animation.play(_level.getTile(x, y), -1);
+				var t = _level.getTile(x, y);
+				_tileArray[counter].animation.play(t.name, -1);
+				_tileArray[counter++].angle = t.angle;
 			}
 		}
 	}
@@ -367,6 +403,7 @@ class LevelEditorState extends FlxState
 				if (block.decal != "" && _showDecals)
 				{
 					s.animation.play(block.decal, -1);
+					s.angle = block.angle;
 					s.visible = true;
 				}
 				else
