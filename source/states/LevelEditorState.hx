@@ -111,7 +111,7 @@ class LevelEditorState extends FlxState
 		if (_newState.ok)
 		{
 			_level = new Level(_newState.x, _newState.y);
-			_level.fill("t_placeholder");
+			_level.fill("t_gggg");
 			
 			updateSprites();
 		}

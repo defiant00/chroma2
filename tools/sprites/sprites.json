@@ -1,13 +1,5 @@
 [
   {
-    "name": "t_placeholder",
-    "frames": [ "placeholder" ],
-    "frameRate": 0,
-    "looped": false,
-    "flipX": false,
-    "flipY": false
-  },
-  {
     "name": "indicator",
     "frames": [ "indicator" ],
     "frameRate": 0,

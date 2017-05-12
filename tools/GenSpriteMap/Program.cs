@@ -12,7 +12,8 @@ namespace GenSpriteMap
     {
         static void Main(string[] args)
         {
-            var spriteSheet = new Bitmap(2048, 2048, PixelFormat.Format32bppArgb);
+            int dim = 512;
+            var spriteSheet = new Bitmap(dim, dim, PixelFormat.Format32bppArgb);
             var g = Graphics.FromImage(spriteSheet);
 
             var areas = new List<Rectangle>();
@@ -29,22 +30,40 @@ namespace GenSpriteMap
 
                 bool placed = false;
                 var img = Image.FromFile(file);
+                var outerSize = new Point(img.Width + 2, img.Height + 2);
                 for (int i = 0; i < areas.Count && !placed; i++)
                 {
                     var area = areas[i];
-                    if (img.Width <= area.Width && img.Height <= area.Height)
+                    if (outerSize.X <= area.Width && outerSize.Y <= area.Height)
                     {
-                        outSprites.areas.Add(new SpriteOutArea { x = area.X, y = area.Y, width = img.Width, height = img.Height });
+                        outSprites.areas.Add(new SpriteOutArea { x = area.X + 1, y = area.Y + 1, width = img.Width, height = img.Height });
 
-                        g.DrawImage(img, new Rectangle(area.Location, img.Size));
+                        // Top-left pixel
+                        g.DrawImage(img, new Rectangle(area.Location, new Size(1, 1)), new Rectangle(0, 0, 1, 1), GraphicsUnit.Pixel);
+                        // Top-right pixel
+                        g.DrawImage(img, new Rectangle(area.Location.X + img.Width + 1, area.Location.Y, 1, 1), new Rectangle(img.Width - 1, 0, 1, 1), GraphicsUnit.Pixel);
+                        // Bottom-left pixel
+                        g.DrawImage(img, new Rectangle(area.Location.X, area.Location.Y + img.Height + 1, 1, 1), new Rectangle(0, img.Height - 1, 1, 1), GraphicsUnit.Pixel);
+                        // Bottom-right pixel
+                        g.DrawImage(img, new Rectangle(area.Location.X + img.Width + 1, area.Location.Y + img.Height + 1, 1, 1), new Rectangle(img.Width - 1, img.Height - 1, 1, 1), GraphicsUnit.Pixel);
+                        // Top row
+                        g.DrawImage(img, new Rectangle(area.Location.X + 1, area.Location.Y, img.Width, 1), new Rectangle(0, 0, img.Width, 1), GraphicsUnit.Pixel);
+                        // Left row
+                        g.DrawImage(img, new Rectangle(area.Location.X, area.Location.Y + 1, 1, img.Height), new Rectangle(0, 0, 1, img.Height), GraphicsUnit.Pixel);
+                        // Right row
+                        g.DrawImage(img, new Rectangle(area.Location.X + img.Width + 1, area.Location.Y + 1, 1, img.Height), new Rectangle(img.Width - 1, 0, 1, img.Height), GraphicsUnit.Pixel);
+                        // Bottom row
+                        g.DrawImage(img, new Rectangle(area.Location.X + 1, area.Location.Y + img.Height + 1, img.Width, 1), new Rectangle(0, img.Height - 1, img.Width, 1), GraphicsUnit.Pixel);
+                        // Main image
+                        g.DrawImage(img, area.Location.X + 1, area.Location.Y + 1, img.Size.Width, img.Size.Height);
                         areas.RemoveAt(i);
-                        if (img.Height < area.Height)
+                        if (outerSize.Y < area.Height)
                         {
-                            areas.Insert(i, new Rectangle(area.X, area.Y + img.Height, area.Width, area.Height - img.Height));
+                            areas.Insert(i, new Rectangle(area.X, area.Y + outerSize.Y, area.Width, area.Height - outerSize.Y));
                         }
-                        if (img.Width < area.Width)
+                        if (outerSize.X < area.Width)
                         {
-                            areas.Insert(i, new Rectangle(area.X + img.Width, area.Y, area.Width - img.Width, img.Height));
+                            areas.Insert(i, new Rectangle(area.X + outerSize.X, area.Y, area.Width - outerSize.X, outerSize.Y));
                         }
                         placed = true;
                     }
