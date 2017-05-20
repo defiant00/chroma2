@@ -9,72 +9,96 @@
     {
       "x": 35,
       "y": 1,
+      "width": 8,
+      "height": 7
+    },
+    {
+      "x": 45,
+      "y": 1,
+      "width": 8,
+      "height": 7
+    },
+    {
+      "x": 55,
+      "y": 1,
+      "width": 8,
+      "height": 7
+    },
+    {
+      "x": 65,
+      "y": 1,
+      "width": 8,
+      "height": 7
+    },
+    {
+      "x": 75,
+      "y": 1,
+      "width": 8,
+      "height": 7
+    },
+    {
+      "x": 85,
+      "y": 1,
+      "width": 8,
+      "height": 7
+    },
+    {
+      "x": 95,
+      "y": 1,
+      "width": 8,
+      "height": 7
+    },
+    {
+      "x": 105,
+      "y": 1,
+      "width": 8,
+      "height": 7
+    },
+    {
+      "x": 1,
+      "y": 35,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "x": 35,
+      "y": 35,
       "width": 32,
       "height": 32
     },
     {
       "x": 69,
-      "y": 1,
+      "y": 35,
       "width": 32,
       "height": 32
     },
     {
       "x": 103,
-      "y": 1,
+      "y": 35,
       "width": 32,
       "height": 32
     },
     {
       "x": 137,
-      "y": 1,
+      "y": 35,
       "width": 32,
       "height": 32
     },
     {
       "x": 171,
-      "y": 1,
+      "y": 35,
       "width": 32,
       "height": 32
     },
     {
       "x": 205,
-      "y": 1,
+      "y": 35,
       "width": 32,
       "height": 32
     },
     {
       "x": 239,
-      "y": 1,
-      "width": 32,
-      "height": 32
-    },
-    {
-      "x": 273,
-      "y": 1,
-      "width": 32,
-      "height": 32
-    },
-    {
-      "x": 307,
-      "y": 1,
-      "width": 32,
-      "height": 32
-    },
-    {
-      "x": 341,
-      "y": 1,
-      "width": 32,
-      "height": 32
-    },
-    {
-      "x": 375,
-      "y": 1,
-      "width": 32,
-      "height": 32
-    },
-    {
-      "x": 409,
-      "y": 1,
+      "y": 35,
       "width": 32,
       "height": 32
     }
@@ -83,7 +107,7 @@
     {
       "name": "indicator",
       "indices": [
-        10
+        14
       ],
       "frameRate": 0,
       "looped": false,
@@ -103,7 +127,7 @@
     {
       "name": "t_gggg",
       "indices": [
-        5
+        9
       ],
       "frameRate": 0,
       "looped": false,
@@ -113,7 +137,7 @@
     {
       "name": "t_wggg",
       "indices": [
-        11
+        15
       ],
       "frameRate": 0,
       "looped": false,
@@ -123,7 +147,7 @@
     {
       "name": "t_ggww",
       "indices": [
-        6
+        10
       ],
       "frameRate": 0,
       "looped": false,
@@ -133,7 +157,7 @@
     {
       "name": "t_gwgw_g",
       "indices": [
-        7
+        11
       ],
       "frameRate": 0,
       "looped": false,
@@ -143,7 +167,7 @@
     {
       "name": "t_gwgw_w",
       "indices": [
-        8
+        12
       ],
       "frameRate": 0,
       "looped": false,
@@ -153,7 +177,7 @@
     {
       "name": "t_gwww",
       "indices": [
-        9
+        13
       ],
       "frameRate": 0,
       "looped": false,
@@ -163,7 +187,7 @@
     {
       "name": "t_wwww",
       "indices": [
-        12
+        16
       ],
       "frameRate": 0,
       "looped": false,
@@ -173,10 +197,10 @@
     {
       "name": "d_flower1",
       "indices": [
-        1,
         2,
         3,
-        4
+        4,
+        5
       ],
       "frameRate": 8,
       "looped": true,

@@ -103,7 +103,7 @@ class LevelEditorState extends FlxState
 	
 	function decalPickerClosed():Void
 	{
-		_selectedDecal.animation.play(_decalPicker.selectedSprite);
+		setSelectedDecal(_decalPicker.selectedSprite);
 	}
 	
 	function newClosed():Void
@@ -295,9 +295,9 @@ class LevelEditorState extends FlxState
 		_selectedTile.animation.play("t_gggg");
 		_selectedTile.scrollFactor.set(0, 0);
 		
-		_editControls.add(_selectedDecal = new FlxSprite(35, 1));
+		_editControls.add(_selectedDecal = new FlxSprite());
 		_selectedDecal.loadGraphicFromSprite(_baseSprite);
-		_selectedDecal.animation.play("d_flower1");
+		setSelectedDecal("d_flower1");
 		_selectedDecal.scrollFactor.set(0, 0);
 		
 		_editControls.add(_tileAngleText = new FlxText(2, 2));
@@ -311,6 +311,18 @@ class LevelEditorState extends FlxState
 		_editControls.add(_statusText = new FlxText(120, 4));
 		_statusText.scrollFactor.set(0, 0);
 		setStatusText();
+	}
+	
+	function setSelectedDecal(decal: String):Void
+	{
+		_selectedDecal.animation.play(decal, -1);
+		_selectedDecal.setPosition(35 + ((32 - _selectedDecal.frameWidth) >> 1), 1 + ((32 - _selectedDecal.frameHeight) >> 1));
+	}
+	
+	function setDecal(spr: FlxSprite, decal: String, x:Int, y:Int):Void
+	{
+		spr.animation.play(decal, -1);
+		spr.setPosition(x * 32 + 16 + ((32 - spr.frameWidth) >> 1), y * 32 + 16 + ((32 - spr.frameHeight) >> 1));
 	}
 	
 	function setStatusText():Void
@@ -341,12 +353,12 @@ class LevelEditorState extends FlxState
 		{
 			for (y in 0..._level.yDim)
 			{
-				var s = new FlxSprite(x * 32 + 16, y * 32 + 16);
+				var s = new FlxSprite();
 				s.loadGraphicFromSprite(_baseSprite);
 				var block = _level.getBlock(x, y);
 				if (block.decal != "" && _showDecals)
 				{
-					s.animation.play(block.decal, -1);
+					setDecal(s, block.decal, x, y);
 					s.angle = block.angle;
 					s.visible = true;
 				}
@@ -402,7 +414,7 @@ class LevelEditorState extends FlxState
 				var s = _decalArray[counter++];
 				if (block.decal != "" && _showDecals)
 				{
-					s.animation.play(block.decal, -1);
+					setDecal(s, block.decal, x, y);
 					s.angle = block.angle;
 					s.visible = true;
 				}
